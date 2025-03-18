@@ -1,0 +1,124 @@
+
+Express.js Middleware - A Simple Guide
+
+Middleware in Express.js are functions that execute before reaching the final request handler. They are useful for logging, authentication, request validation, error handling, and more.
+
+📌 What is Middleware?
+Middleware functions in Express.js have access to:
+
+Request (req): The HTTP request object.
+Response (res): The HTTP response object.
+next(): A function to pass control to the next middleware.
+
+
+🛠 Basic Syntax
+
+app.use((req, res, next) => {
+    console.log('Middleware executed');
+    next(); // Moves to the next function
+});
+
+
+📝 Types of Middleware
+
+
+Application-Level	Runs for every request or specific routes.
+Router-Level	Applied to specific routers (express.Router()).
+Built-in	Provided by Express (express.json(), express.static()).
+Third-Party	Middleware from npm (e.g., cors, morgan).
+Error-Handling	Handles errors in Express (err, req, res, next).
+
+
+📌 Examples of Middleware
+
+1️⃣ Logging Middleware
+
+const express = require('express');
+const app = express();
+
+// Custom logging middleware
+const logger = (req, res, next) => {
+    console.log([${new Date().toISOString()}] ${req.method} ${req.url});
+    next(); // Pass control to the next function
+};
+
+app.use(logger);
+
+app.get('/', (req, res) => {
+    res.send('Welcome to Middleware!');
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+✔ Logs each request with method & URL.
+
+2️⃣ Authentication Middleware
+
+const authMiddleware = (req, res, next) => {
+    const token = req.headers['authorization']; // Extract token
+
+    if (!token) {
+        return res.status(403).json({ message: 'Access Denied' });
+    }
+
+    if (token === 'my-secret-token') {
+        next(); // Proceed if valid
+    } else {
+        res.status(401).json({ message: 'Invalid Token' });
+    }
+};
+
+app.use('/secure', authMiddleware); // Apply to specific routes
+
+app.get('/secure', (req, res) => {
+    res.send('You have accessed a protected route!');
+});
+✔ Protects routes with a token-based authentication system.
+
+3️⃣ Error-Handling Middleware
+
+const errorHandler = (err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something went wrong!' });
+};
+
+app.use(errorHandler);
+✔ Catches errors and prevents app crashes.
+
+📌 Best Practices
+✅ Use next() to avoid hanging requests.
+✅ Keep middleware functions modular (separate files).
+✅ Use error-handling middleware for debugging.
+✅ Apply middleware selectively to routes for better performance.
+
+📌 How to Use Middleware in a Separate File
+Instead of defining middleware in server.js, move it to logger.js:
+
+📂 File: logger.js
+
+const logger = (req, res, next) => {
+    console.log([${new Date().toISOString()}] ${req.method} ${req.url});
+    next();
+};
+
+module.exports = logger;
+📂 File: server.js
+
+const express = require('express');
+const logger = require('./logger');
+
+const app = express();
+app.use(logger);
+
+app.get('/', (req, res) => {
+    res.send('Hello Express Middleware');
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+✔ Keeps code clean and reusable.
+
+📌 Conclusion
+Middleware helps in logging, authentication, validation, and error handling.
+It can be global (for all requests) or route-specific.
+Always modularize middleware for maintainability.
+🚀 Start using Express.js middleware today for efficient request handling! 🚀
+

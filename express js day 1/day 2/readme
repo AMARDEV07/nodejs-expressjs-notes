@@ -1,0 +1,172 @@
+Express.js: Handling Requests and Routing (Code)
+post acces using html,html file acess ,chaining,routing
+
+------------------------------------------------------------------------
+1️⃣ GET vs POST Requests
+
+GET Request:
+Small content fetch karne ke liye use hota hai.
+URL parameters ya query strings ke saath data bhej sakte hain.
+Secure nahi hota, URL me data dikh sakta hai.
+
+
+
+POST Request:
+Large content aur sensitive data (passwords, form data) bhejne ke liye use hota hai.
+Secure hota hai, URL me data show nahi hota.
+Data body me send hota hai, jise backend process karta hai.
+
+---------------------------------
+Example: Handling POST Request
+
+->🔹 Step 1: Static Files Serve Karna
+Sabse pehle, public folder ko static serve karna hai.
+
+code;-
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// Static files ko serve karna
+app.use(express.static("public"));
+
+app.listen(port, () => {
+    console.log(Server is running on http://localhost:${port});
+});
+
+
+
+->🔹 Step 2: HTML File Create Karna
+HTML file public/index.html me ek post request test karne ka function likhna hai.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing POST Request</title>
+</head>
+<body>
+    <h1>This is a POST request test</h1>
+    <script>
+        async function testPostRequest() {
+            let response = await fetch("/", { method: "POST" });
+            let data = await response.text();
+            console.log(data);
+        }
+        testPostRequest();
+    </script>
+</body>
+</html>
+
+->🔹 Step 3: Express POST Route Banayein
+Server par POST request handle karne ke liye:
+
+
+app.post('/', (req, res) => {
+    console.log("Received a POST request");
+    res.send('Hello World from POST!');
+});
+
+NOTE:
+
+🚀 Better Way: Use Postman for Testing
+Browser se POST request dekhna mushkil hai, isliye Postman use karein. Isme alag-alag HTTP requests ko easily test kiya ja sakta hai.
+-------------------------------------------------------------------------------
+2️⃣ Merging All Requests (Chaining):
+Agar ek hi route pe multiple requests handle karni ho (GET, POST, PUT, DELETE), to chaining ka use kar sakte hain.
+
+app.route('/')
+    .get((req, res) => {
+        console.log("Received a GET request");
+        res.send('Hello World GET!');
+    })
+    .post((req, res) => {
+        console.log("Received a POST request");
+        res.send('Hello World POST!');
+    })
+    .put((req, res) => {
+        console.log("Received a PUT request");
+        res.send('Hello World PUT!');
+    })
+    .delete((req, res) => {
+        console.log("Received a DELETE request");
+        res.send('Hello World DELETE!');
+    });
+
+
+
+3️⃣ Serving HTML Files
+Agar hume ek HTML file serve karni hai, to sendFile() ka use karte hain.
+
+app.get('/index', (req, res) => {
+    console.log("Serving index.html");
+
+    res.sendFile('public/index.html', { root: __dirname });
+});
+
+Yeh index.html ko /index route pe serve karega.
+---------------------------------------------------------------
+4️⃣ Installing Postman
+Postman ek powerful tool hai jo industry me API testing ke liye use hota hai. Isme GET, POST, PUT, DELETE jaise requests easily test kar sakte hain.
+
+Installation:
+
+Download Postman
+Install karke requests ko manually test karein.
+
+---------------------------------------------------------------------------------------
+5️⃣ Express Router (Better Code Structure)
+
+Agar code badh raha hai, to routes ko alag file me organize karna zaroori ho jata hai.
+
+🔹 Step 1: Create a routes Folder
+Ek routes/blog.js file banayenge jisme blog-related routes likhenge.
+const express = require('express');
+const router = express.Router();
+
+// Blog homepage
+router.get('/', (req, res) => {
+  res.send('Blog Home Page');
+});
+
+// About page
+router.get('/about', (req, res) => {
+  res.send('About the Blog');
+});
+
+// Dynamic blog post route
+router.get('/blogpost/:slug', (req, res) => {
+    res.send(Blog post: ${req.params.slug});
+});
+
+module.exports = router;
+
+
+
+🔹 Step 2: Import Routes in Main File (server.js)
+Ab server.js me blog routes ko import karenge.
+
+
+const blogRoutes = require('./routes/blog');
+
+app.use('/blog', blogRoutes);
+Ab:
+
+/blog par Blog Home Page milega.
+/blog/about par About the Blog milega.
+/blog/blogpost/some-title par Blog post: some-title milega.
+
+🎯 Final Thoughts
+✅ Static files serve karna easy hai.
+✅ Postman ka use karein for API testing.
+✅ Routes ko separate file me likhne se code maintainable hota hai.
+✅ Express Router ka use karna best practice hai.
+
+🚀 Best Practice:
+1️⃣ Static files serve karein (express.static()).
+2️⃣ Requests ko properly handle karein (GET, POST, PUT, DELETE).
+3️⃣ Postman se API testing karein.
+4️⃣ Routes ko alag files me organize karein (Express Router).
+

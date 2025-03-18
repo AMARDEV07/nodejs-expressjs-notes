@@ -1,0 +1,120 @@
+# 🌟 ECMAScript vs CommonJS 🌟
+
+## 📦 NPM Basics  
+
+1️⃣ **`npm init`** - Sets up a new npm package (creates a `package.json` file with details).  
+2️⃣ **Modules** - Used to write reusable code. 📜  
+3️⃣ **node_modules** - A collection of installed dependencies. 📂  
+4️⃣ **`npm i <module_name>`** - Installs the specified module. 📥  
+
+--------------------------------------------------------
+
+## 🌍 How to Create a Basic Server? 🚀
+
+### 1️⃣ Using CommonJS (require) 🛠️:----
+
+
+const { createServer } = require('node:http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World 🌎');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/ 🚀`);
+});
+
+
+
+🔍 About require();-
+
+✅ require() is used to import modules in CommonJS.
+✅ setHeader() is used to set the content type (e.g., text/plain, text/html).
+🛑 If you change your code, you need to restart the server manually!
+
+✅ To auto-restart the server, install nodemon:
+
+npm i --global nodemon
+
+Now, changes will be updated automatically! 🔄✨
+🛠️ Managing Node.js Versions
+
+✅ To switch between different Node.js versions, use Node Version Manager (NVM):
+
+$ nvm use 16  # Use Node.js v16  
+$ nvm use 14  # Use Node.js v14  
+--------------------------------------------------------------------
+
+#2:🏗️ Using ECMAScript (ES Module) for Server
+
+import { createServer } from 'node:http';
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World 🌎');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/ 🚀`);
+});
+--------------------------------------------------------------------
+
+📤 Types of Export/Import in JavaScript
+📌 1️⃣ Named Export
+
+// mymodule.js
+export const a = 10;
+export const b = 20;
+
+// Importing named exports
+import { a, b } from "./mymodule.js";
+console.log(a, b);  // Output: 10 20
+
+📌 2️⃣ Default Export
+
+// mymodule.js
+const obj = { name: "Aman", age: 21 };
+export default obj;
+
+// Importing default export
+import obj from "./mymodule.js";
+console.log(obj);  // Output: { name: "Aman", age: 21 }
+
+📌 3️⃣ Using CommonJS (require())
+
+// Exporting
+let c = 59;
+module.exports = c;
+
+// Importing
+let value = require("./mymodule2.js");
+console.log(value);  // Output: 59
+
+// Exporting multiple values
+module.exports = {
+  a: 10,
+  c: 20,
+};
+
+🎯 Summary
+
+✅ CommonJS (require) is used in Node.js.
+✅ ES Module (import/export) is the modern JavaScript standard.
+✅ Use nodemon to restart the server automatically.
+✅ Manage Node.js versions using NVM.
+
+🚀 Happy Coding! 💻🎉
+
+
+
+
+

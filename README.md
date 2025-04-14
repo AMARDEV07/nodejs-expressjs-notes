@@ -24,11 +24,12 @@ const fs = require('fs');
 
 // Export
 module.exports = { name: "Aman" };
-ESModules (ESM):
 
-js
-Copy
-Edit
+
+***ESModules (ESM):
+
+```js
+
 // Export
 export const a = 10;
 export default function greet() {}

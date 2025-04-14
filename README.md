@@ -53,11 +53,11 @@ import greet from './file.js';
 ### 1🛠️ Using CommonJS
 
 
-const { createServer } = require('node:http');
+const { createServer } = require('node:http');//header
 
-const server = createServer((req, res) => {
+const server = createServer((req, res) => { 
   res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Content-Type", "text/plain");//content type like jsno h plane text h html type h etc
   res.end("Hello World 🌎");
 });
 
@@ -82,11 +82,29 @@ server.listen(3000, () => console.log("Server running on port 3000 🚀"));
 
 ---------------------------------------------------------------------------------------
 # 📁 File System (fs) Module
+The `fs` module in Node.js allows you to interact with the file system (read, write, update, delete files). It's a **core module**, so you don't need to install it separately.
+
+
+
 
 ### 🧱 Synchronous
 
 const fs = require('fs');
+
+
+
+// Write to a file (overwrites if file exists)
 fs.writeFileSync("file.txt", "Hello Aman!");
+
+// Read from a file
+const data = fs.readFileSync("file.txt", "utf-8");
+console.log(data);
+
+// Append to a file
+fs.appendFileSync("file.txt", "\nAppended Line");
+
+// Delete a file
+fs.unlinkSync("file.txt");
 
 ### 🧱 Asynchronous
 
@@ -108,6 +126,8 @@ readFile();
 
 --------------------------------------------------------------
 # 🧭Path Module
+The `path` module in Node.js provides utilities for working with **file and directory paths**. It's a **core module**, so you don’t need to install it.
+
 
 const path = require('path');
 console.log(__dirname); // Current directory

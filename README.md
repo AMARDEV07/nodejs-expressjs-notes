@@ -45,9 +45,9 @@ import greet from './file.js';
 
 -----------------------------------------------------------------------
 
-#ℹ️ Use "type": "module" in package.json to enable ESM.
-----------------------------------------------------------------------
+### ℹ️ Use "type": "module" in package.json to enable ESM.
 
+-------------------------------------------------
 # 🌐 Creating a Server:
 
 ### 1🛠️ Using CommonJS
@@ -115,7 +115,7 @@ console.log(__dirname); // Current directory
 
 -----------------------------------------------------------------------------------
 
-#-----⚡ Express.js Basics
+# ⚡ Express.js Basics
 
 ### 🔹 Install Express:
 

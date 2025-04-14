@@ -16,9 +16,11 @@ Welcome to the ultimate beginner-to-pro guide for building backend apps using **
 | `npm i -g nodemon` | Installs nodemon globally (auto-restart server) |
 
 
-✅ Module Systems in Node.js
 
-CommonJS (CJS):
+✅ Module Systems in Node.js
+---------------------------------------------------------------------------------
+
+#1) CommonJS (CJS):
 
 // Import
 const fs = require('fs');
@@ -27,7 +29,7 @@ const fs = require('fs');
 module.exports = { name: "Aman" };
 
 
-ESModules (ESM):
+#2)ESModules (ESM):
 
 
 
@@ -39,8 +41,10 @@ export default function greet() {}
 // Import
 import { a } from './file.js';
 import greet from './file.js';
+-----------------------------------------------------------------------
 
 #ℹ️ Use "type": "module" in package.json to enable ESM.
+----------------------------------------------------------------------
 
 🌐 Creating a Server:
 
@@ -73,19 +77,20 @@ server.listen(3000, () => console.log("Server running on port 3000 🚀"));
 
 
 
-
+---------------------------------------------------------------------------------------
 ###📁 File System (fs) Module
 
-🧱 Synchronous
+->🧱 Synchronous
 
 const fs = require('fs');
 fs.writeFileSync("file.txt", "Hello Aman!");
 
-🧱 Asynchronous
+->🧱 Asynchronous
 
 fs.writeFile("file.txt", "Async Hello!", () => {
   console.log("File written asynchronously");
 });
+----------------------------------------------------------------------
 
 
 🔄 Using fs/promises with Async/Await
@@ -98,22 +103,22 @@ async function readFile() {
 }
 readFile();
 
-
-🧭 Path Module
+--------------------------------------------------------------
+🧭 ### Path Module
 
 const path = require('path');
 console.log(__dirname); // Current directory
 
 
 
-
+-----------------------------------------------------------------------------------
 
 ####-----⚡ Express.js Basics
 
 🔹 Install Express:
 
 npm i express
-
+----------------------------
 
 🔹 Setup a Server
 
@@ -123,7 +128,7 @@ const app = express();
 app.get('/', (req, res) => res.send('Hello, Express.js!'));
 
 app.listen(3000, () => console.log("Express server running on http://localhost:3000"));
-
+---------------------------------------------------------------------
 📥 GET vs POST Requests
 --------------------------------
 Feature	GET	POST
@@ -131,7 +136,7 @@ URL Data	✅	❌
 Secure	❌	✅
 Usage	Fetching	Submitting (e.g., forms)
 
-
+------------------------------------------------------------
 #🧪 Handling POST Requests
 
 Step 1: Serve static files
@@ -153,9 +158,9 @@ app.post("/", (req, res) => {
   res.send("Received a POST request");
 });
 
-
+-----------------------------------------------------------------
 💡3## Use Postman for testing APIs.
-
+--------------------------------------------------------------
 ##🔁 Route Chaining
 
 app.route('/')
@@ -163,15 +168,16 @@ app.route('/')
   .post((req, res) => res.send("POST"))
   .put((req, res) => res.send("PUT"))
   .delete((req, res) => res.send("DELETE"));
+-------------------------------------------------------------------------
+###🌍 Params & Queries
 
-🌍 Params & Queries
-🔹 Params
+->🔹 Params
 
 app.get('/blog/:slug/:category', (req, res) => {
   res.send(`Slug: ${req.params.slug}, Category: ${req.params.category}`);
 });
 
-🔹 Query Strings
+->🔹 Query Strings
 
 app.get('/search', (req, res) => {
   res.send(`Search Mode: ${req.query.mode}, Region: ${req.query.region}`);
@@ -179,13 +185,14 @@ app.get('/search', (req, res) => {
 
 Example URL:
 /blog/js/webdev?mode=dark&region=in
-
-🗂️ Serve Static Files
+-----------------------------------------------------------
+🗂️ ###Serve Static Files
 
 app.use(express.static('public'));
 // Access via: http://localhost:3000/image.png
+----------------------------------------------------------
+📁### Express Router
 
-📁 Express Router
 routes/blog.js
 
 const express = require('express');
@@ -198,14 +205,15 @@ router.get('/post/:slug', (req, res) => res.send(`Blog: ${req.params.slug}`));
 module.exports = router;
 
 server.js
+
 const blogRoutes = require('./routes/blog');
 app.use('/blog', blogRoutes);
 
 
-
+-----------------------------------------------------------------------------
 ##->🧩 Express Middleware
 
-🔹 Logger Middleware
+🔹 1) Logger Middleware
 logger = (req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
@@ -213,7 +221,7 @@ logger = (req, res, next) => {
 
 app.use(logger);
 
-🔐 Authentication Middleware
+🔐 2) Authentication Middleware
 
 const auth = (req, res, next) => {
   const token = req.headers['authorization'];
@@ -223,7 +231,7 @@ const auth = (req, res, next) => {
 app.use('/secure', auth);
 
 
-🛠 Error-Handling Middleware
+🛠 3) Error-Handling Middleware
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

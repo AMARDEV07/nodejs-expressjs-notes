@@ -260,3 +260,4 @@ Modularize code with routers and middleware.
 Use fs, path, and other core modules for efficient file management.
 
 Build APIs like a pro with clean, maintainable code.
+https://chatgpt.com/share/67fd614b-cab8-800e-94ce-33ea2d47d4db

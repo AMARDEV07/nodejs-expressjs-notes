@@ -20,7 +20,7 @@ Welcome to the ultimate beginner-to-pro guide for building backend apps using **
 ✅ Module Systems in Node.js
 ---------------------------------------------------------------------------------
 
-#1) CommonJS (CJS):
+### 1) CommonJS (CJS):
 
 // Import
 const fs = require('fs');
@@ -29,7 +29,7 @@ const fs = require('fs');
 module.exports = { name: "Aman" };
 
 
-#2)ESModules (ESM):
+### 2)ESModules (ESM):
 
 
 
@@ -48,7 +48,7 @@ import greet from './file.js';
 #ℹ️ Use "type": "module" in package.json to enable ESM.
 ----------------------------------------------------------------------
 
-🌐 Creating a Server:
+# 🌐 Creating a Server:
 
 ### 1🛠️ Using CommonJS
 
@@ -80,14 +80,14 @@ server.listen(3000, () => console.log("Server running on port 3000 🚀"));
 
 
 ---------------------------------------------------------------------------------------
-###📁 File System (fs) Module
+# 📁 File System (fs) Module
 
-->🧱 Synchronous
+### 🧱 Synchronous
 
 const fs = require('fs');
 fs.writeFileSync("file.txt", "Hello Aman!");
 
-->🧱 Asynchronous
+### 🧱 Asynchronous
 
 fs.writeFile("file.txt", "Async Hello!", () => {
   console.log("File written asynchronously");
@@ -95,7 +95,7 @@ fs.writeFile("file.txt", "Async Hello!", () => {
 ----------------------------------------------------------------------
 
 
-🔄 Using fs/promises with Async/Await
+### 🔄 Using fs/promises with Async/Await
 
 import fs from 'fs/promises';
 
@@ -106,7 +106,7 @@ async function readFile() {
 readFile();
 
 --------------------------------------------------------------
-🧭 ### Path Module
+# 🧭Path Module
 
 const path = require('path');
 console.log(__dirname); // Current directory
@@ -115,14 +115,14 @@ console.log(__dirname); // Current directory
 
 -----------------------------------------------------------------------------------
 
-####-----⚡ Express.js Basics
+#-----⚡ Express.js Basics
 
-🔹 Install Express:
+### 🔹 Install Express:
 
 npm i express
 ----------------------------
 
-🔹 Setup a Server
+### 🔹 Setup a Server
 
 const express = require('express');
 const app = express();
@@ -131,7 +131,8 @@ app.get('/', (req, res) => res.send('Hello, Express.js!'));
 
 app.listen(3000, () => console.log("Express server running on http://localhost:3000"));
 ---------------------------------------------------------------------
-📥 GET vs POST Requests
+
+#📥 GET vs POST Requests
 --------------------------------
 Feature	GET	POST
 URL Data	✅	❌
@@ -139,7 +140,7 @@ Secure	❌	✅
 Usage	Fetching	Submitting (e.g., forms)
 
 ------------------------------------------------------------
-#🧪 Handling POST Requests
+# 🧪 Handling POST Requests
 
 Step 1: Serve static files
 
@@ -213,9 +214,9 @@ app.use('/blog', blogRoutes);
 
 
 -----------------------------------------------------------------------------
-##->🧩 Express Middleware
+# 🧩 Express Middleware
 
-🔹 1) Logger Middleware
+# 🔹 1) Logger Middleware
 logger = (req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
@@ -223,7 +224,7 @@ logger = (req, res, next) => {
 
 app.use(logger);
 
-🔐 2) Authentication Middleware
+# 🔐 2) Authentication Middleware
 
 const auth = (req, res, next) => {
   const token = req.headers['authorization'];
@@ -233,7 +234,7 @@ const auth = (req, res, next) => {
 app.use('/secure', auth);
 
 
-🛠 3) Error-Handling Middleware
+# 🛠 3) Error-Handling Middleware
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

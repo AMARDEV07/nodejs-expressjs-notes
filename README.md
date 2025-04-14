@@ -40,7 +40,9 @@ export default function greet() {}
 
 // Import
 import { a } from './file.js';
+
 import greet from './file.js';
+
 -----------------------------------------------------------------------
 
 #ℹ️ Use "type": "module" in package.json to enable ESM.
